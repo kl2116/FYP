@@ -1,5 +1,5 @@
-Row_Size = 32;        % Matrix Size (Row)
-Column_Size = 32;     % Matrix Size (Column)
+Row_Size = 8;        % Matrix Size (Row)
+Column_Size = 8;     % Matrix Size (Column)
 M = 5;                % Power of signal frequency
 N = 8;                % Power of length
 f = 2^M;              % Frequency of base harmonic
@@ -188,6 +188,20 @@ G_fourier(1:8,5) = P1_FT_I5(2:9);
 G_fourier(1:8,6) = P1_FT_I6(2:9);
 G_fourier(1:8,7) = P1_FT_I7(2:9);
 G_fourier(1:8,8) = P1_FT_I8(2:9);
+
+% Plotting
+figure
+heatmap(G)
+title('Real Conductance Matrix')
+
+figure
+heatmap(G_fourier);
+title('Estimated Conductance Matrix with Fourier Transform')
+
+figure
+Percentage_error = (abs((G_fourier - G))./G)*100;
+heatmap(Percentage_error);
+title('Percentage Error in Estimation of Conductance Matrix')
 
 % Calculate new current from conductance matrix
 Iout_1 = G_fourier'*Vin;
